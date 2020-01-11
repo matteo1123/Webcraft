@@ -1,0 +1,10 @@
+.App {
+
+	background-image:url('./background.jpg');
+	background-size:100% 100%;
+	background-repeat:norepeat;
+	display:block;
+	width:250vw;
+	height: 250vh;
+	
+}
