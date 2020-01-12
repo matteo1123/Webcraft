@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import './Building.css';
-import pic from './Building.png';
+import './Worker.css';
+import pic from './Worker.png';
 
 
-class Building extends Component{
+class Worker extends Component{
 	static defaultProps={top:"25px", left: "25px"}
 	constructor(props){
 		super(props);
@@ -16,7 +16,7 @@ class Building extends Component{
 	render(){
 		
 		return (
-			<div onClick = {this.directClick} style={this.props}className='Building'>
+			<div onClick = {this.directClick} style={this.props}className='Worker'>
 				<img alt="shutup" src= {pic}/>
 				
 			
@@ -26,4 +26,4 @@ class Building extends Component{
 	}
 }
 
-export default Building;
+export default Worker;

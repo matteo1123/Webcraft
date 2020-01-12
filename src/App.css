@@ -2,9 +2,21 @@
 
 	background-image:url('./background.jpg');
 	background-size:100% 100%;
-	background-repeat:norepeat;
+	background-repeat:no-repeat;
 	display:block;
 	width:250vw;
 	height: 250vh;
+	overflow:hidden;
 	
+	
+}
+.selectBox{
+	border:solid rgb(0, 255, 0) 2px;
+	position:absolute;
+    display:block;
+	
+}
+.Selected{
+	box-shadow: 0 1px 2px 2px rgb(0,255,0);
+
 }

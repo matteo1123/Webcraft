@@ -1,13 +1,14 @@
 .Pause {
   	text-align: center;
-	position:absolute;
- 	left:50%;
- 	top:50%;
+	position:fixed;
+ 	left:5%;
+ 	top:5%;
 	background:rgba(0, 0, 0, .4);
 	border:rgba(250, 250, 250, .7) solid 1px;
 	border-radius:2px;
-	height:90vh;
-	width:95vw;
+	height:85vh;
+	width:85vw;
 	margin-top:4vh;
 	color:white;
+	
 }
