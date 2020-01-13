@@ -35,8 +35,7 @@ class App extends Component {
 		}
 	}
 	unselectEverythingElse(target){
-		let wereSelected = document.querySelectorAll(".Selected");
-		[...wereSelected].map((s)=>{
+		[...document.querySelectorAll(".Selected")].map((s)=>{
 			s.classList.toggle("Selected");
 			return 0;
 		})
@@ -48,6 +47,7 @@ class App extends Component {
   		window.scrollTo(scrollX, scrollY);
 	}
 	selectBox(e){
+		this.unselectEverythingElse(null);
 		let selectBox = document.createElement("div");
 		selectBox.classList.add("selectBox");
 		document.body.appendChild(selectBox);
@@ -74,10 +74,30 @@ class App extends Component {
 	}
 	closeBox(e){
 		let {selectBox} = this.state;
-		console.log(selectBox.style.top,selectBox.style.height, selectBox.style.left, selectBox.style.width);
 		[...document.querySelectorAll(".Unit")].map((unit) => {
-			console.log(unit.style.top); 
-			if(unit.style.top > selectBox.style.top && unit.style.top < selectBox.style.height)unit.classList.add("Selected");
+			let unitTop = Number(unit.style.top.slice(0, unit.style.top.length-2));
+			let unitLeft = Number(unit.style.left.slice(0, unit.style.left.length-2));
+			let boxTop = Number(selectBox.style.top.slice(0, selectBox.style.top.length - 2));
+			let boxHeight = Number(selectBox.style.height.slice(0, selectBox.style.height.length - 2));
+			let boxLeft = Number(selectBox.style.left.slice(0, selectBox.style.left.length - 2));
+			let boxWidth = Number(selectBox.style.width.slice(0, selectBox.style.width.length - 2));
+		if(unitTop +3 >= boxTop && unitTop -3 <= boxHeight + boxTop && unitLeft +3  >= boxLeft && unitLeft -3 <= boxLeft + boxWidth)unit.classList.add("Selected");
+			// console.log("unit: ", unit.style.top, "box: ", selectBox.style.top)
+			// if(unit.style.top +3 >= selectBox.style.top){
+			// 	console.log("1", unit.style.top);
+			// 	if(unit.style.top -3 <= selectBox.style.height + selectBox.style.top){
+			// 		console.log("2");
+			// 		if(unit.style.left +3  >= selectBox.style.left){
+						
+			// 			console.log("3", unit.style.top);
+			// 			if(unit.style.left -3 <= selectBox.style.left + selectBox.style.width){
+			// 			   	console.log("4", unit.style.top);
+			// 			   }
+			// 		}
+					
+			// 	}
+				
+			// }
 			return 0;
 		})
 		selectBox.remove();
@@ -85,6 +105,7 @@ class App extends Component {
 		window.removeEventListener('mouseup', this.closeBox);
 	}
 	rightClick(e){
+		clearInterval(this.state.target);
 		e.preventDefault();
 		if(document.querySelector(".Selected")){
 			let target = document.querySelector(".Selected");
@@ -92,7 +113,6 @@ class App extends Component {
 				console.log("make set waypoint function!")
 			}
 			if(target.classList.contains("Worker")){
-				console.log(target);
 				this.setState({target: setInterval(this.moveTo ,25, target, e.pageX, e.pageY)});
 				
 			}
