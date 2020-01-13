@@ -16,7 +16,11 @@
     display:block;
 	
 }
-.Selected{
-	box-shadow: 0 1px 2px 2px rgb(0,255,0);
-
+.Selected.Building{
+	box-shadow: 0 9px 5px 15px rgb(0,255,0);
+	overflow:visible;
+}
+.Selected.Worker{
+	box-shadow: 0 2px 2px 2px rgb(0,255,0);
+	overflow:visible;
 }

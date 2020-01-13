@@ -5,6 +5,7 @@ import Minimap from './Minimap';
 import Building from './Building';
 import Worker from './Worker';
 import CommandBar from './CommandBar';
+import Scrollbar from './Scrollbar';
 
 class App extends Component {
 	constructor(props){
@@ -23,7 +24,7 @@ class App extends Component {
 		this.closeBox = this.closeBox.bind(this);
 		this.rightClick = this.rightClick.bind(this);
 		this.moveTo = this.moveTo.bind(this);
-		
+		this.scroll = this.scroll.bind(this);
 	}
 
 	
@@ -73,32 +74,54 @@ class App extends Component {
 	}
 	closeBox(e){
 		let {selectBox} = this.state;
-		console.log(selectBox.style.top, selectBox.style.left, selectBox.style.width, selectBox.style.height);
+		console.log(selectBox.style.top,selectBox.style.height, selectBox.style.left, selectBox.style.width);
+		[...document.querySelectorAll(".Unit")].map((unit) => {
+			console.log(unit.style.top); 
+			if(unit.style.top > selectBox.style.top && unit.style.top < selectBox.style.height)unit.classList.add("Selected");
+			return 0;
+		})
 		selectBox.remove();
 		window.removeEventListener('mousemove', this.resizeBox);
 		window.removeEventListener('mouseup', this.closeBox);
 	}
 	rightClick(e){
-		
 		e.preventDefault();
-		
-		let target = document.querySelector(".Selected");
-		if(target.classList.contains("Building")){
-			console.log("make set waypoint function!")
-		}
-		if(target.classList.contains("Worker")){
-			this.moveTo(target, e.pageX, e.pageY);
+		if(document.querySelector(".Selected")){
+			let target = document.querySelector(".Selected");
+			if(target.classList.contains("Building")){
+				console.log("make set waypoint function!")
+			}
+			if(target.classList.contains("Worker")){
+				console.log(target);
+				this.setState({target: setInterval(this.moveTo ,25, target, e.pageX, e.pageY)});
+				
+			}
 		}
 	}
 	moveTo(target, x,y){
-		console.log(target);
-		setInterval((target, x, y) => {
-			if(target.style.top < x) target.style.top +=5;
-			if(target.style.left < y) target.style.left +=5;
-			if(target.style.top > x) target.style.top +=5;
-			if(target.style.left > y) target.style.left +=5;
-			
-		}, 100);
+
+		let top = Number(target.style.top.slice(0, target.style.top.length -2));
+		let left = Number(target.style.left.slice(0, target.style.left.length-2));
+		if(top < y) top += 5;
+		if(top > y) top -=5;
+		if(left < x) left +=5;
+		if(left >x) left  -= 5;
+		target.style.top = top + "px";
+		target.style.left = left + "px";
+		if(Math.abs(top + left - x - y) < 30) clearInterval(this.state.target);
+	}
+	scroll(direction){
+
+		if(direction === "left"){
+			window.scrollBy(-20, 0);
+		}if(direction === "right"){
+			window.scrollBy( 20, 0);
+		}if(direction === "up"){
+			window.scrollBy(0, -20);
+		}if(direction === "down"){
+			window.scrollBy(0, +20);
+		}
+		
 	}
 
   	componentDidMount(){
@@ -115,14 +138,20 @@ class App extends Component {
 				onDragStart={this.selectBox}  
 				scroll="no" 
 				overflow="hidden"
-				 onContextMenu={this.rightClick}
+				onContextMenu={this.rightClick}
 				>
 				{this.state.paused && <Pause/>}
 				<Building selected = {this.unselectEverythingElse} top="200px" left="150px" />
-				<Building selected={this.unselectEverythingElse} top="400px" left="150px" />
-				<Worker moveTo={this} selected={this.unselectEverythingElse}/>
+				<Worker selected={this.unselectEverythingElse} top="145px"/>
+				<Worker selected={this.unselectEverythingElse} top="90px"/>
+				<Worker selected={this.unselectEverythingElse}/>
 				<Minimap click = {this.miniMapClick}/> 
 				<CommandBar selected={document.querySelector(".Selected")}/>
+				<Scrollbar mouseover={this.scroll} direction="left" />
+				<Scrollbar mouseover={this.scroll} direction="right" />
+				<Scrollbar mouseover={this.scroll} direction="up" />
+				<Scrollbar mouseover={this.scroll} direction="down" />
+				
 	  		</div>
 		);
  }

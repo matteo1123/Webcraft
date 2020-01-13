@@ -1,6 +1,6 @@
 .Building{
-	width:17vw;
-	height:auto;
+	width:250px;
+	height:150px;
 	position:absolute;
 	display:flex;
 	align-items:center;
@@ -9,7 +9,7 @@
 	
 }
 .Building img{
-	height:120%;
+	
 	width:120%;
 	
 }

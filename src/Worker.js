@@ -16,7 +16,7 @@ class Worker extends Component{
 	render(){
 		
 		return (
-			<div onClick = {this.directClick} style={this.props}className='Worker'>
+			<div onClick = {this.directClick} style={this.props}className='Worker Unit'>
 				<img alt="shutup" src= {pic}/>
 				
 			

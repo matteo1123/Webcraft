@@ -1,0 +1,33 @@
+
+.left{
+	position:fixed;
+	left:0;
+	height:100%;
+	width:2vw;
+	background-color: rgba(0, 0, 0, 0);
+	cursor: move; 
+}
+.right{
+	position:fixed;
+	right:0;
+	height:100%;
+	width: 2vw;
+	background-color: rgba(0, 0, 0, 0);
+	cursor: move; 
+}
+.up{
+	position:fixed;
+	top:0;
+	height: 2vh;
+	width:100%;
+	background-color: rgba(0, 0, 0, 0);
+	cursor: move; 
+}
+.down{
+	position:fixed;
+	bottom:0;
+	width:100%;
+	height:2vh;
+	background-color: rgba(0, 0, 0, 0);
+	cursor: move; 
+}
