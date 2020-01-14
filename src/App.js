@@ -82,22 +82,7 @@ class App extends Component {
 			let boxLeft = Number(selectBox.style.left.slice(0, selectBox.style.left.length - 2));
 			let boxWidth = Number(selectBox.style.width.slice(0, selectBox.style.width.length - 2));
 		if(unitTop +3 >= boxTop && unitTop -3 <= boxHeight + boxTop && unitLeft +3  >= boxLeft && unitLeft -3 <= boxLeft + boxWidth)unit.classList.add("Selected");
-			// console.log("unit: ", unit.style.top, "box: ", selectBox.style.top)
-			// if(unit.style.top +3 >= selectBox.style.top){
-			// 	console.log("1", unit.style.top);
-			// 	if(unit.style.top -3 <= selectBox.style.height + selectBox.style.top){
-			// 		console.log("2");
-			// 		if(unit.style.left +3  >= selectBox.style.left){
-						
-			// 			console.log("3", unit.style.top);
-			// 			if(unit.style.left -3 <= selectBox.style.left + selectBox.style.width){
-			// 			   	console.log("4", unit.style.top);
-			// 			   }
-			// 		}
-					
-			// 	}
-				
-			// }
+
 			return 0;
 		})
 		selectBox.remove();
