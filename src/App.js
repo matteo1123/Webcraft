@@ -15,8 +15,7 @@ class App extends Component {
 			selectBox:{}, 
 			boxPos: []
 					}
-		
-		
+				
 		this.paused = this.paused.bind(this);
 		this.miniMapClick = this.miniMapClick.bind(this);
 		this.selectBox = this.selectBox.bind(this);
@@ -27,7 +26,6 @@ class App extends Component {
 		this.scroll = this.scroll.bind(this);
 	}
 
-	
 	paused(evt){
 		if(evt.keyCode ===27){
 			if (this.state.paused)this.setState({paused: false});
@@ -41,10 +39,11 @@ class App extends Component {
 		})
 	}
 	miniMapClick(x, y) {
-		// Minimap gives coordinates 0-20 for x and y		
-		let scrollX = x*50 /window.innerWidth * 3500;
-		let scrollY = y*40/ window.innerHeight * 1200;
-  		window.scrollTo(scrollX, scrollY);
+		// Minimap gives coordinates 0-20 for x and y
+		// at 350 vw  xMax = 2194 at 350 vh YMax = 1527
+		let scrollX = x * .05 * 2.5 * window.innerWidth;
+		let scrollY = y * .05 * 2.5 * window.innerHeight;
+		window.scrollTo(scrollX, scrollY);
 	}
 	selectBox(e){
 		this.unselectEverythingElse(null);
@@ -60,7 +59,6 @@ class App extends Component {
 		boxPos = [e.pageX, e.pageY];
 		this.setState({selectBox: selectBox, boxPos: boxPos});
 		window.addEventListener('mousemove', this.resizeBox); 
-
 	}
 	resizeBox(e) {
 		let {boxPos,selectBox} = this.state;
@@ -69,7 +67,6 @@ class App extends Component {
         selectBox.style.width = Math.abs(e.pageX - boxPos[0]) + 'px';
         selectBox.style.height = Math.abs(e.pageY - boxPos[1]) + 'px';
 		window.addEventListener('mouseup', this.closeBox);
-		
 		this.setState({selectBox: selectBox});
 	}
 	closeBox(e){
@@ -81,7 +78,11 @@ class App extends Component {
 			let boxHeight = Number(selectBox.style.height.slice(0, selectBox.style.height.length - 2));
 			let boxLeft = Number(selectBox.style.left.slice(0, selectBox.style.left.length - 2));
 			let boxWidth = Number(selectBox.style.width.slice(0, selectBox.style.width.length - 2));
-		if(unitTop +3 >= boxTop && unitTop -3 <= boxHeight + boxTop && unitLeft +3  >= boxLeft && unitLeft -3 <= boxLeft + boxWidth)unit.classList.add("Selected");
+		if(unitTop +20 >= boxTop &&
+		   unitTop -8 <= boxHeight + boxTop &&
+		   unitLeft +20  >= boxLeft &&
+		   unitLeft -8 <= boxLeft + boxWidth)
+			unit.classList.add("Selected");
 
 			return 0;
 		})
@@ -90,16 +91,19 @@ class App extends Component {
 		window.removeEventListener('mouseup', this.closeBox);
 	}
 	rightClick(e){
-		clearInterval(this.state.target);
+		
 		e.preventDefault();
 		if(document.querySelector(".Selected")){
-			let target = document.querySelector(".Selected");
-			if(target.classList.contains("Building")){
+			let target = document.querySelectorAll(".Selected");
+			if(target[0].classList.contains("Building")){
 				console.log("make set waypoint function!")
 			}
-			if(target.classList.contains("Worker")){
-				this.setState({target: setInterval(this.moveTo ,25, target, e.pageX, e.pageY)});
-				
+			if(target[0].classList.contains("Unit")){
+				[...target].map((u)=>{
+					this.setState({id: false});
+					this.setState({id : setInterval(this.moveTo ,25, u, e.pageX, e.pageY)});	
+					return 0;
+				})
 			}
 		}
 	}
@@ -113,10 +117,10 @@ class App extends Component {
 		if(left >x) left  -= 5;
 		target.style.top = top + "px";
 		target.style.left = left + "px";
-		if(Math.abs(top + left - x - y) < 30) clearInterval(this.state.target);
+		console.log(target.id);
+		if(Math.abs(top + left - x - y) < 30) this.setState({id: false});
 	}
 	scroll(direction){
-
 		if(direction === "left"){
 			window.scrollBy(-20, 0);
 		}if(direction === "right"){
@@ -125,6 +129,14 @@ class App extends Component {
 			window.scrollBy(0, -20);
 		}if(direction === "down"){
 			window.scrollBy(0, +20);
+		}if(direction === "upleft"){
+			window.scrollBy(-20, -20);
+		}if(direction === "upright"){
+			window.scrollBy( 20, -20);
+		}if(direction === "downleft"){
+			window.scrollBy(-20, 20);
+		}if(direction === "downright"){
+			window.scrollBy( 20, 20);
 		}
 		
 	}
@@ -144,6 +156,7 @@ class App extends Component {
 				scroll="no" 
 				overflow="hidden"
 				onContextMenu={this.rightClick}
+				onClick={this.unselectEverythingElse}
 				>
 				{this.state.paused && <Pause/>}
 				<Building selected = {this.unselectEverythingElse} top="200px" left="150px" />
@@ -156,6 +169,10 @@ class App extends Component {
 				<Scrollbar mouseover={this.scroll} direction="right" />
 				<Scrollbar mouseover={this.scroll} direction="up" />
 				<Scrollbar mouseover={this.scroll} direction="down" />
+				<Scrollbar mouseover={this.scroll} direction="upleft" />
+				<Scrollbar mouseover={this.scroll} direction="upright" />				
+				<Scrollbar mouseover={this.scroll} direction="downleft" />
+				<Scrollbar mouseover={this.scroll} direction="downright" />
 				
 	  		</div>
 		);

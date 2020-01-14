@@ -5,7 +5,7 @@ class Minimap extends Component {
 	constructor(props){
 		super(props);
 		this.clickMiniMap = this.clickMiniMap.bind(this);
-		this.state = {top:"75vh", left:"25vw"}
+		this.state = {top:"0", left:"0"}
 	}
 	clickMiniMap(evt){
 		// var x = evt.pageX - this.offsetLeft; 

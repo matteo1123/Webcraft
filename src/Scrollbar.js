@@ -8,7 +8,7 @@ class Scrollbar extends Component{
 		this.stopScroll = this.stopScroll.bind(this);
 	}
 	scroll(){
-		this.setState({scrolling: window.setInterval(this.props.mouseover, 50, this.props.direction)});
+		this.setState({scrolling: window.setInterval(this.props.mouseover, 20, this.props.direction)});
 	}
 	stopScroll(){
 		window.clearInterval(this.state.scrolling);
@@ -16,7 +16,10 @@ class Scrollbar extends Component{
 	}
 	render(){
 		return (
-			<div onMouseOut={this.stopScroll} onMouseOver={this.scroll} className={this.props.direction}>
+			<div 
+				onMouseOut={this.stopScroll} 
+				onMouseOver={this.scroll} 
+				className={"scrollbar "+this.props.direction}>
 			</div>	
 		)
 	}

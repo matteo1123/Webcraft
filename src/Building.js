@@ -11,6 +11,7 @@ class Building extends Component{
 	}
 	directClick(evt){
 		this.props.selected();
+		evt.stopPropagation();
 		evt.target.parentNode.classList.add("Selected");
 	}
 	render(){
