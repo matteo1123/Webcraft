@@ -6,6 +6,8 @@ import Building from './Building';
 import Worker from './Worker';
 import CommandBar from './CommandBar';
 import Scrollbar from './Scrollbar';
+import uuid from 'react-uuid';
+import Fighter from './Fighter';
 
 class App extends Component {
 	constructor(props){
@@ -13,7 +15,8 @@ class App extends Component {
 		this.state= {
 			paused: false, 
 			selectBox:{}, 
-			boxPos: []
+			boxPos: [],
+			moveTo: {}
 					}
 				
 		this.paused = this.paused.bind(this);
@@ -22,7 +25,6 @@ class App extends Component {
 		this.resizeBox = this.resizeBox.bind(this);
 		this.closeBox = this.closeBox.bind(this);
 		this.rightClick = this.rightClick.bind(this);
-		this.moveTo = this.moveTo.bind(this);
 		this.scroll = this.scroll.bind(this);
 	}
 
@@ -33,6 +35,7 @@ class App extends Component {
 		}
 	}
 	unselectEverythingElse(target){
+		
 		[...document.querySelectorAll(".Selected")].map((s)=>{
 			s.classList.toggle("Selected");
 			return 0;
@@ -40,7 +43,7 @@ class App extends Component {
 	}
 	miniMapClick(x, y) {
 		// Minimap gives coordinates 0-20 for x and y
-		// at 350 vw  xMax = 2194 at 350 vh YMax = 1527
+		// at 350 vw  xMax = 2194 at 350 vh YMax = 1527 (on small monitor)
 		let scrollX = x * .05 * 2.5 * window.innerWidth;
 		let scrollY = y * .05 * 2.5 * window.innerHeight;
 		window.scrollTo(scrollX, scrollY);
@@ -78,10 +81,10 @@ class App extends Component {
 			let boxHeight = Number(selectBox.style.height.slice(0, selectBox.style.height.length - 2));
 			let boxLeft = Number(selectBox.style.left.slice(0, selectBox.style.left.length - 2));
 			let boxWidth = Number(selectBox.style.width.slice(0, selectBox.style.width.length - 2));
-		if(unitTop +20 >= boxTop &&
-		   unitTop -8 <= boxHeight + boxTop &&
-		   unitLeft +20  >= boxLeft &&
-		   unitLeft -8 <= boxLeft + boxWidth)
+		if(unitTop +30 >= boxTop &&
+		   unitTop +10 <= boxHeight + boxTop &&
+		   unitLeft +30  >= boxLeft &&
+		   unitLeft +10 <= boxLeft + boxWidth)
 			unit.classList.add("Selected");
 
 			return 0;
@@ -99,27 +102,15 @@ class App extends Component {
 				console.log("make set waypoint function!")
 			}
 			if(target[0].classList.contains("Unit")){
-				[...target].map((u)=>{
-					this.setState({id: false});
-					this.setState({id : setInterval(this.moveTo ,25, u, e.pageX, e.pageY)});	
-					return 0;
-				})
+				let uids = [...target].map((u)=>u.id)
+				this.setState({moveTo:{
+					id: uids,
+					coord:[e.pageX, e.pageY]
+				}})
 			}
 		}
 	}
-	moveTo(target, x,y){
 
-		let top = Number(target.style.top.slice(0, target.style.top.length -2));
-		let left = Number(target.style.left.slice(0, target.style.left.length-2));
-		if(top < y) top += 5;
-		if(top > y) top -=5;
-		if(left < x) left +=5;
-		if(left >x) left  -= 5;
-		target.style.top = top + "px";
-		target.style.left = left + "px";
-		console.log(target.id);
-		if(Math.abs(top + left - x - y) < 30) this.setState({id: false});
-	}
 	scroll(direction){
 		if(direction === "left"){
 			window.scrollBy(-20, 0);
@@ -159,10 +150,14 @@ class App extends Component {
 				onClick={this.unselectEverythingElse}
 				>
 				{this.state.paused && <Pause/>}
-				<Building selected = {this.unselectEverythingElse} top="200px" left="150px" />
-				<Worker selected={this.unselectEverythingElse} top="145px"/>
-				<Worker selected={this.unselectEverythingElse} top="90px"/>
-				<Worker selected={this.unselectEverythingElse}/>
+				<Building selected = {this.unselectEverythingElse} top="200px" left="450px" />
+				<Worker id={'p1'} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="210px" left="375px"/>
+				<Worker id={'p2'} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="240px" left="375px"/>
+				<Worker id={'p3'} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="270px" left="375px"/>
+				<Worker id={'p4'} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="310px" left="375px"/>
+				<Worker id={'p5'} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="340px" left="375px"/>
+				<Fighter id={"f1"} moveTo={this.state.moveTo} selected={this.unselectEverythingElse} top="340px" left="875px"/>
+				
 				<Minimap click = {this.miniMapClick}/> 
 				<CommandBar selected={document.querySelector(".Selected")}/>
 				<Scrollbar mouseover={this.scroll} direction="left" />
@@ -170,7 +165,7 @@ class App extends Component {
 				<Scrollbar mouseover={this.scroll} direction="up" />
 				<Scrollbar mouseover={this.scroll} direction="down" />
 				<Scrollbar mouseover={this.scroll} direction="upleft" />
-				<Scrollbar mouseover={this.scroll} direction="upright" />				
+				<Scrollbar mouseover={this.scroll} direction="upright" />
 				<Scrollbar mouseover={this.scroll} direction="downleft" />
 				<Scrollbar mouseover={this.scroll} direction="downright" />
 				
