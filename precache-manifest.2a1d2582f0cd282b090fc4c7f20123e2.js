@@ -1,23 +1,23 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "50500b88d34d1bc3eadc7dd188c228c3",
+    "revision": "72b35864e20e1bfb42a445f3b9ecf31a",
     "url": "/Webcraft/index.html"
   },
   {
-    "revision": "34cee51e1dd4712cf44a",
-    "url": "/Webcraft/static/css/main.50b18efc.chunk.css"
+    "revision": "d1bbc9998582aee0c6d2",
+    "url": "/Webcraft/static/css/main.aee0c038.chunk.css"
   },
   {
-    "revision": "f92c44a8d9f818f9d7d0",
-    "url": "/Webcraft/static/js/2.af3380d1.chunk.js"
+    "revision": "ea16d00db52138daa231",
+    "url": "/Webcraft/static/js/2.df09bd8e.chunk.js"
   },
   {
     "revision": "d705cb622423d72c5defbf368ca70dcc",
-    "url": "/Webcraft/static/js/2.af3380d1.chunk.js.LICENSE"
+    "url": "/Webcraft/static/js/2.df09bd8e.chunk.js.LICENSE"
   },
   {
-    "revision": "34cee51e1dd4712cf44a",
-    "url": "/Webcraft/static/js/main.6c7d025f.chunk.js"
+    "revision": "d1bbc9998582aee0c6d2",
+    "url": "/Webcraft/static/js/main.4251c7cc.chunk.js"
   },
   {
     "revision": "1c4865b9ef9cfd23d6c8",

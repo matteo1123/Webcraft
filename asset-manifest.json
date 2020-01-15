@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/Webcraft/static/css/main.50b18efc.chunk.css",
-    "main.js": "/Webcraft/static/js/main.6c7d025f.chunk.js",
-    "main.js.map": "/Webcraft/static/js/main.6c7d025f.chunk.js.map",
+    "main.css": "/Webcraft/static/css/main.aee0c038.chunk.css",
+    "main.js": "/Webcraft/static/js/main.4251c7cc.chunk.js",
+    "main.js.map": "/Webcraft/static/js/main.4251c7cc.chunk.js.map",
     "runtime-main.js": "/Webcraft/static/js/runtime-main.bd9593c8.js",
     "runtime-main.js.map": "/Webcraft/static/js/runtime-main.bd9593c8.js.map",
-    "static/js/2.af3380d1.chunk.js": "/Webcraft/static/js/2.af3380d1.chunk.js",
-    "static/js/2.af3380d1.chunk.js.map": "/Webcraft/static/js/2.af3380d1.chunk.js.map",
+    "static/js/2.df09bd8e.chunk.js": "/Webcraft/static/js/2.df09bd8e.chunk.js",
+    "static/js/2.df09bd8e.chunk.js.map": "/Webcraft/static/js/2.df09bd8e.chunk.js.map",
     "index.html": "/Webcraft/index.html",
-    "precache-manifest.1070de89316cd5f243405d89eab43b52.js": "/Webcraft/precache-manifest.1070de89316cd5f243405d89eab43b52.js",
+    "precache-manifest.2a1d2582f0cd282b090fc4c7f20123e2.js": "/Webcraft/precache-manifest.2a1d2582f0cd282b090fc4c7f20123e2.js",
     "service-worker.js": "/Webcraft/service-worker.js",
-    "static/css/main.50b18efc.chunk.css.map": "/Webcraft/static/css/main.50b18efc.chunk.css.map",
-    "static/js/2.af3380d1.chunk.js.LICENSE": "/Webcraft/static/js/2.af3380d1.chunk.js.LICENSE",
+    "static/css/main.aee0c038.chunk.css.map": "/Webcraft/static/css/main.aee0c038.chunk.css.map",
+    "static/js/2.df09bd8e.chunk.js.LICENSE": "/Webcraft/static/js/2.df09bd8e.chunk.js.LICENSE",
     "static/media/Building.png": "/Webcraft/static/media/Building.1da2f8a8.png",
     "static/media/BuildingCommandBar.jpg": "/Webcraft/static/media/BuildingCommandBar.19d3d6dd.jpg",
     "static/media/Worker.png": "/Webcraft/static/media/Worker.20adb206.png",
@@ -20,8 +20,8 @@
   },
   "entrypoints": [
     "static/js/runtime-main.bd9593c8.js",
-    "static/js/2.af3380d1.chunk.js",
-    "static/css/main.50b18efc.chunk.css",
-    "static/js/main.6c7d025f.chunk.js"
+    "static/js/2.df09bd8e.chunk.js",
+    "static/css/main.aee0c038.chunk.css",
+    "static/js/main.4251c7cc.chunk.js"
   ]
 }
